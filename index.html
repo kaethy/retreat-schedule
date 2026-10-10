@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AIST retreat schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  color-scheme: light dark;
+
+  --serif: 'PT Serif', Georgia, 'Times New Roman', serif;
+  --sans: 'PT Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  --paper: #f3f6fb;
+  --sheet: #fcfdff;
+  --surface: #e2e9f4;
+  --ink: #1d1d1b;
+  --muted: #55595f;
+  --rule: #c9d3e1;
+  --rule-soft: #e3e9f2;
+  --accent: #2864b4;
+  --highlight: color-mix(in srgb, var(--accent) 10%, var(--sheet));
+
+  /* session kinds: tinted fill + a stronger edge */
+  --talk-bg: color-mix(in srgb, #2864b4 12%, var(--sheet));      --talk-edge: #2864b4;
+  --workshop-bg: color-mix(in srgb, #2f7d5b 12%, var(--sheet));  --workshop-edge: #2f7d5b;
+  --meal-bg: color-mix(in srgb, #b07d2b 13%, var(--sheet));      --meal-edge: #a8741f;
+  --social-bg: color-mix(in srgb, #a24a7a 11%, var(--sheet));    --social-edge: #a24a7a;
+  --logistics-bg: color-mix(in srgb, #6b7380 11%, var(--sheet)); --logistics-edge: #6b7380;
+
+  --hour: 88px;   /* height of one hour in the timetable */
+  --t: 160ms ease-out;
+
+  --boat: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='150 320 724 406'%3E%3Cpath fill-rule='evenodd' d='M170.48 470.02Q246.82 533.53 353.930 533.53L414.68 533.53L483.14 322.82L516.81 426.45L556.42 426.45L524.43 327.99L542.54 327.99L670.45 721.66L652.34 721.66L562.02 443.68L522.41 443.68L551.6 533.53L579.44 533.53L585.04 550.75L353.93 550.75Q256.11 550.75 182.28 500.47Q199.53 542.17 231.09 569.55Q273.77 606.59 331.26 606.59L603.18 606.59L608.78 623.81L331.26 623.81Q267.34 623.81 219.8 582.56Q174.93 543.62 156.69 478.97L153.6 468.02L168.09 468.02ZM644.83 606.59L692.74 606.59Q750.23 606.59 792.91 569.55Q824.47 542.17 841.72 500.47Q767.89 550.75 670.07 550.75L626.69 550.75L621.09 533.53L670.07 533.53Q777.18 533.53 853.52 470.02L855.91 468.02L870.4 468.02L867.31 478.97Q849.07 543.62 804.2 582.56Q756.66 623.81 692.74 623.81L650.43 623.81ZM533.15 533.53L504.15 443.68L462.13 443.68L433.13 533.53ZM278.35 654.05L618.6 654.05L624.2 671.27L278.35 671.27ZM665.85 671.27L660.25 654.05L745.65 654.05L745.65 671.27ZM498.6 426.45L483.14 378.55L467.68 426.45Z'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #11161e; --sheet: #171d27; --surface: #232c3a; --ink: #e6e9ee; --muted: #9ba5b3;
+    --rule: #323c4b; --rule-soft: #222a36; --accent: #7eaef0;
+    --highlight: color-mix(in srgb, var(--accent) 16%, var(--sheet));
+    --talk-bg: color-mix(in srgb, #7eaef0 16%, var(--sheet));      --talk-edge: #7eaef0;
+    --workshop-bg: color-mix(in srgb, #6cc49c 15%, var(--sheet));  --workshop-edge: #6cc49c;
+    --meal-bg: color-mix(in srgb, #e0b25e 14%, var(--sheet));      --meal-edge: #e0b25e;
+    --social-bg: color-mix(in srgb, #e08bb9 14%, var(--sheet));    --social-edge: #e08bb9;
+    --logistics-bg: color-mix(in srgb, #a3abb8 12%, var(--sheet)); --logistics-edge: #a3abb8;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #11161e; --sheet: #171d27; --surface: #232c3a; --ink: #e6e9ee; --muted: #9ba5b3;
+  --rule: #323c4b; --rule-soft: #222a36; --accent: #7eaef0;
+  --highlight: color-mix(in srgb, var(--accent) 16%, var(--sheet));
+  --talk-bg: color-mix(in srgb, #7eaef0 16%, var(--sheet));      --talk-edge: #7eaef0;
+  --workshop-bg: color-mix(in srgb, #6cc49c 15%, var(--sheet));  --workshop-edge: #6cc49c;
+  --meal-bg: color-mix(in srgb, #e0b25e 14%, var(--sheet));      --meal-edge: #e0b25e;
+  --social-bg: color-mix(in srgb, #e08bb9 14%, var(--sheet));    --social-edge: #e08bb9;
+  --logistics-bg: color-mix(in srgb, #a3abb8 12%, var(--sheet)); --logistics-edge: #a3abb8;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+*, *::before, *::after { box-sizing: inherit; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased; overflow-x: clip;
+}
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.wrap { max-width: 82rem; margin: 0 auto; padding: 0 1.25rem 4rem; }
+@media (min-width: 640px) { .wrap { padding: 0 2rem 5rem; } }
+
+/* ---------- top ---------- */
+.masthead { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+.masthead a { color: var(--ink); display: block; }
+.masthead svg { display: block; height: 3.25rem; width: auto; }
+.masthead .place { color: var(--muted); font-size: 1rem; text-align: right; }
+
+.intro { display: grid; gap: 1.25rem 3rem; padding: 3rem 0 0; }
+@media (min-width: 860px) { .intro { grid-template-columns: 5fr 3fr; align-items: end; padding-top: 4rem; } }
+h1 { font: 700 2.5rem/1.15 var(--serif); margin: 0; text-wrap: balance; }
+@media (min-width: 760px) { h1 { font-size: 3.25rem; } }
+.intro p { margin: 0; font-size: 1.125rem; text-wrap: pretty; max-width: 36rem; }
+
+/* section rule with the boat sailing on it, as on the AIST site */
+.rule { position: relative; margin-top: 4.5rem; padding-top: 2.5rem; }
+.rule::before { content: ''; position: absolute; inset: 0 0 auto; height: 4px; background: var(--ink); }
+.rule::after { content: ''; position: absolute; top: calc(-5rem * 334 / 724); left: 0;
+  width: 5rem; height: calc(5rem * 406 / 724); background: var(--ink);
+  mask: var(--boat) center / contain no-repeat; -webkit-mask: var(--boat) center / contain no-repeat; }
+
+/* ---------- controls ---------- */
+.controls { display: grid; gap: 1.5rem 3rem; margin-bottom: 2rem; }
+@media (min-width: 900px) { .controls { grid-template-columns: auto 1fr; align-items: start; } }
+.controls h2 { font: 400 1.25rem/1.3 var(--serif); margin: 0 0 .5rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; list-style: none; margin: 0; padding: 0; }
+
+.day-toggle, .kind-toggle, .link-btn {
+  background: none; border: 0; padding: .35rem 0; cursor: pointer; text-align: left;
+}
+.day-toggle { display: inline-flex; align-items: baseline; gap: .6rem; min-height: 2.75rem; }
+.day-toggle .box { width: 1rem; height: 1rem; border: 1.5px solid var(--ink); align-self: center;
+  display: grid; place-items: center; flex: none; transition: background var(--t), border-color var(--t); }
+.day-toggle .box::after { content: ''; width: .45rem; height: .25rem; border: solid var(--paper);
+  border-width: 0 0 2px 2px; rotate: -45deg; translate: 0 -1px; opacity: 0; }
+.day-toggle[aria-pressed="true"] .box { background: var(--ink); }
+.day-toggle[aria-pressed="true"] .box::after { opacity: 1; }
+.day-toggle .name { font: 400 1.375rem/1.2 var(--serif); }
+.day-toggle .sub { color: var(--muted); font-size: .95rem; }
+.day-toggle[aria-pressed="false"] .name { color: var(--muted); }
+
+.uline { background-image: linear-gradient(var(--accent), var(--accent)); background-repeat: no-repeat;
+  background-position: left bottom; background-size: 0% 1px; padding-bottom: 3px; transition: background-size var(--t); }
+.kind-toggle { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.5rem; font-size: 1rem; }
+.kind-toggle .sw { width: .9rem; height: .9rem; border-left: 3px solid var(--edge); background: var(--bg); flex: none; }
+.kind-toggle[aria-pressed="true"] .uline, .kind-toggle:hover .uline { background-size: 100% 1px; }
+.link-btn { color: var(--accent); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  text-underline-offset: 4px; font-size: 1rem; min-height: 2.5rem; }
+.link-btn:hover { color: var(--ink); text-decoration-color: var(--ink); }
+.hint { color: var(--muted); font-size: .95rem; margin: .25rem 0 0; }
+
+/* kind colours */
+[data-kind="talk"]      { --bg: var(--talk-bg);      --edge: var(--talk-edge); }
+[data-kind="workshop"]  { --bg: var(--workshop-bg);  --edge: var(--workshop-edge); }
+[data-kind="meal"]      { --bg: var(--meal-bg);      --edge: var(--meal-edge); }
+[data-kind="social"]    { --bg: var(--social-bg);    --edge: var(--social-edge); }
+[data-kind="logistics"] { --bg: var(--logistics-bg); --edge: var(--logistics-edge); }
+
+/* ---------- timetable ---------- */
+.sheet { background: var(--sheet); border: 1px solid var(--rule); }
+.timetable { display: grid; grid-template-columns: 3.75rem repeat(var(--days, 3), minmax(0, 1fr)); }
+.tt-head { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; display: contents; }
+.tt-corner, .tt-day {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 4;
+  background: var(--sheet); border-bottom: 1px solid var(--rule); padding: .9rem 1rem .75rem;
+}
+.tt-day { border-left: 1px solid var(--rule); display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.tt-day h3 { font: 700 1.375rem/1.2 var(--serif); margin: 0; }
+.tt-day span { color: var(--muted); font-size: .95rem; white-space: nowrap; }
+.tt-axis { position: relative; height: calc(var(--hour) * 14); }
+.tt-axis time { position: absolute; right: .6rem; translate: 0 -50%; font-size: .85rem; color: var(--muted);
+  font-variant-numeric: tabular-nums; }
+.tt-axis time:first-child { translate: 0 15%; }
+.tt-col {
+  position: relative; height: calc(var(--hour) * 14); border-left: 1px solid var(--rule);
+  display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(168, 1fr);
+  column-gap: 3px; padding: 0 3px;
+  background:
+    repeating-linear-gradient(to bottom, var(--rule) 0 1px, transparent 1px var(--hour)),
+    repeating-linear-gradient(to bottom, transparent 0 calc(var(--hour) / 2), var(--rule-soft) calc(var(--hour) / 2) calc(var(--hour) / 2 + 1px), transparent calc(var(--hour) / 2 + 1px) var(--hour));
+}
+
+.s {
+  position: relative; margin: 2px 0 1px; min-height: 0; overflow: hidden;
+  background: var(--bg); border: 0; border-left: 3px solid var(--edge);
+  padding: .35rem .55rem; text-align: left; cursor: pointer;
+  display: flex; flex-direction: column; gap: .05rem;
+  transition: background var(--t), opacity var(--t), box-shadow var(--t);
+}
+.s:hover, .s:focus-visible { background: color-mix(in srgb, var(--edge) 22%, var(--sheet)); }
+.s:focus-visible { outline-offset: 1px; z-index: 2; }
+.s .t { font: 700 .95rem/1.25 var(--serif); }
+.s .who { font-size: .875rem; line-height: 1.3; color: var(--muted); font-style: italic; }
+.s .when { font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.s.tiny { padding: 0 .55rem; justify-content: center; }
+.s.tiny .t { font: 400 .8rem/1 var(--sans); color: var(--muted); }
+.s.short { padding-block: .25rem; }
+.s.short .t, .s.short .who { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.s .more { position: absolute; right: .45rem; bottom: .3rem; width: .5rem; height: .5rem;
+  border-right: 1.5px solid var(--edge); border-bottom: 1.5px solid var(--edge); opacity: .7; }
+.s.tiny .more, .s.short .more { display: none; }
+
+body[data-filter] .s:not(.match), body[data-filter] .ag-item:not(.ag-par):not(.match), body[data-filter] .ag-sub:not(.match) { opacity: .28; }
+body[data-filter] .s.match { box-shadow: 0 0 0 1.5px var(--edge); }
+
+.empty { padding: 3rem 1.5rem; text-align: center; color: var(--muted); }
+.empty p { margin: 0 0 .5rem; font: 400 1.25rem/1.4 var(--serif); color: var(--ink); }
+
+/* ---------- agenda (narrow screens) ---------- */
+.agenda { display: none; }
+.ag-day + .ag-day { margin-top: 2.5rem; }
+.ag-day h3 { font: 700 1.625rem/1.2 var(--serif); margin: 0 0 .75rem; display: flex; align-items: baseline; gap: .75rem; }
+.ag-day h3 span { font: 400 1rem var(--sans); color: var(--muted); }
+.ag-list { list-style: none; margin: 0; padding: 0; background: var(--sheet); border: 1px solid var(--rule); }
+.ag-item + .ag-item { border-top: 1px solid var(--rule-soft); }
+.ag-item > button { width: 100%; display: grid; grid-template-columns: 6rem 1fr; gap: .75rem;
+  background: none; border: 0; padding: .75rem 1rem .75rem .85rem; cursor: pointer; text-align: left;
+  border-left: 3px solid var(--edge); transition: background var(--t); }
+.ag-item > button:hover { background: var(--bg); }
+.ag-par { padding: .75rem .75rem .75rem 1rem; border-left: 3px solid var(--rule); }
+.ag-par > time { display: block; margin-bottom: .5rem; }
+.ag-par > time small { font-size: .85rem; margin-left: .4rem; }
+.ag-cols { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
+.ag-cols > div { display: flex; flex-direction: column; gap: .4rem; }
+.ag-sub { flex: 1; display: flex; flex-direction: column; gap: .1rem; background: var(--bg); border: 0;
+  border-left: 3px solid var(--edge); padding: .5rem .6rem; text-align: left; cursor: pointer; transition: background var(--t), opacity var(--t); }
+.ag-sub:hover { background: color-mix(in srgb, var(--edge) 22%, var(--sheet)); }
+.ag-sub time { font-size: .8rem; padding: 0; }
+.ag-sub .t { font: 400 1rem/1.3 var(--serif); }
+.ag-sub .who { font-size: .875rem; }
+.ag-item time { color: var(--muted); font-size: .9rem; font-variant-numeric: tabular-nums; padding-top: .1rem; }
+.ag-item .t { font: 400 1.0625rem/1.35 var(--serif); display: block; }
+.ag-item .who { color: var(--muted); font-size: .925rem; font-style: italic; }
+.ag-item .par { display: inline-block; margin-top: .2rem; font-size: .8rem; color: var(--muted);
+  border: 1px solid var(--rule); padding: 0 .4rem; }
+.ag-item.minor .t { font: 400 .95rem/1.35 var(--sans); color: var(--muted); }
+
+@media (max-width: 760px) {
+  .chips { gap: 0 1.25rem; }
+  .day-toggle .sub { display: none; }
+  .sheet.tt { display: none; }
+  .agenda { display: block; }
+  .masthead svg { height: 2.6rem; }
+}
+
+/* ---------- details dialog ---------- */
+dialog {
+  width: min(40rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem);
+  padding: 0; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink);
+  box-shadow: 0 24px 60px -20px rgb(0 0 0 / .35);
+}
+dialog::backdrop { background: color-mix(in srgb, var(--paper) 55%, rgb(0 0 0 / .45)); backdrop-filter: blur(2px); }
+dialog[open] { animation: reveal 180ms ease-out; }
+.dlg { border-top: 6px solid var(--edge); display: flex; flex-direction: column; max-height: calc(100dvh - 2rem); }
+.dlg-body { padding: 1.5rem 1.75rem 1.25rem; overflow-y: auto; }
+.dlg-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .75rem; }
+.kind-tag { display: inline-flex; align-items: center; gap: .5rem; font-size: .95rem; color: var(--muted); }
+.kind-tag i { width: .8rem; height: .8rem; background: var(--bg); border-left: 3px solid var(--edge); }
+.close { width: 2.5rem; height: 2.5rem; border: 1px solid var(--rule); background: none; cursor: pointer;
+  display: grid; place-items: center; flex: none; }
+.close:hover { border-color: var(--ink); }
+.close svg { width: 1rem; height: 1rem; }
+.dlg h2 { font: 700 1.875rem/1.2 var(--serif); margin: 0 0 .35rem; text-wrap: balance; }
+.dlg .speaker { font-size: 1.125rem; margin: 0 0 1rem; font-style: italic; }
+.facts { display: grid; grid-template-columns: max-content 1fr; gap: .25rem 1.25rem; margin: 0 0 1.25rem;
+  padding: .9rem 0; border-block: 1px solid var(--rule); font-size: 1rem; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; font-variant-numeric: tabular-nums; }
+.facts .link-btn { min-height: 0; padding: 0; text-align: left; }
+.abstract { font: 400 1.0625rem/1.7 var(--serif); max-width: 34rem; }
+.abstract p { margin: 0 0 .9rem; }
+.abstract .pending { color: var(--muted); font-style: italic; font-family: var(--sans); }
+.dlg-foot { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--rule);
+  padding: .5rem 1.75rem; background: var(--paper); }
+.dlg-foot button { background: none; border: 0; padding: .5rem 0; cursor: pointer; font-size: .95rem;
+  color: var(--muted); min-height: 2.75rem; display: inline-flex; align-items: center; gap: .4rem; max-width: 48%; }
+.dlg-foot button span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dlg-foot button:hover:not(:disabled) { color: var(--ink); }
+.dlg-foot button:disabled { visibility: hidden; }
+.dlg-foot .next { margin-left: auto; text-align: right; }
+
+footer.note { margin-top: 2.5rem; color: var(--muted); font-size: .95rem; }
+
+@keyframes reveal { from { opacity: 0; translate: 0 -6px; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <a href="https://haglobah.github.io/aist-website/" aria-label="AI Safety Tübingen"><svg role="img" aria-label="AI Safety Tübingen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1264.11 587.71" width="1264.11" height="587.71"><title>AI Safety Tübingen</title><path fill="currentColor" fill-rule="evenodd" d="M18.11 145.82Q114.13 228.4 248.24 229.55L322.82 0L362.11 120.91L408.58 120.91L371.11 5.57L390.64 5.57L578.16 582.71L558.63 582.71L414.62 139.48L368.14 139.48L397.42 229.57L431.2 229.57L437.23 248.14L242.2 248.14L242.23 248.04Q121.03 245.45 29.56 178.6Q52.46 244.9 95.42 286.84Q149.41 339.57 222.05 339.57L466.94 339.57L472.97 358.14L222.05 358.14Q141.85 358.14 82.44 300.13Q27.04 246.02 3.08 155.23L0 143.57L15.5 143.57ZM511.85 339.57L1042.05 339.57Q1114.7 339.57 1168.69 286.84Q1211.65 244.9 1234.55 178.6Q1139.39 248.14 1012.05 248.14L482.14 248.14L476.11 229.57L1012.05 229.57Q1148.61 229.57 1246 145.82L1248.61 143.57L1264.11 143.57L1261.03 155.23Q1237.07 246.02 1181.67 300.13Q1122.26 358.14 1042.05 358.14L517.89 358.14ZM538.22 420.71L532.18 402.14L1177.05 402.14L1177.05 420.71ZM87.05 402.14L487.27 402.14L493.3 420.71L87.05 420.71ZM377.6 229.57L348.48 139.48L297.17 139.48L268.05 229.57ZM479.84 528.59Q485.35 530.17 489.8 533.06Q494.92 536.39 497.88 541.59Q500.84 546.8 500.84 554.02Q500.84 563.93 496.21 570.27Q491.57 576.61 483.38 579.66Q475.18 582.71 464.32 582.71L430.98 582.71L430.98 482.71L462.43 482.71Q472.12 482.71 479.45 485.47Q486.78 488.23 490.96 493.8Q495.13 499.37 495.13 507.94Q495.13 515.4 490.96 520.7Q486.89 525.86 479.84 528.59ZM773.58 545.03L773.58 529.93L822.17 529.93Q822.54 541.14 819.42 551.07Q816.3 561 809.93 568.66Q803.55 576.31 794.14 580.69Q784.73 585.06 772.61 585.06Q761.21 585.06 751.55 581.25Q741.9 577.44 734.79 570.45Q727.68 563.45 723.76 553.84Q719.83 544.22 719.83 532.71Q719.83 521.2 723.83 511.66Q727.82 502.12 735.02 495.21Q742.22 488.31 751.94 484.57Q761.67 480.83 773.07 480.83Q783.05 480.83 791.16 483.58Q799.26 486.33 805.61 491.34Q811.97 496.35 816.48 503.35L801.25 512.91Q797.23 505.96 790.18 501.76Q783.12 497.56 773.07 497.56Q763.65 497.56 755.95 501.89Q748.25 506.23 743.69 514.07Q739.12 521.92 739.12 532.71Q739.12 543.37 743.59 551.4Q748.07 559.43 755.74 563.88Q763.42 568.33 773.07 568.33Q779.49 568.33 784.62 566.55Q789.74 564.77 793.45 561.55Q797.17 558.33 799.65 554.11Q802.14 549.88 803.43 545.03ZM1005.25 482.71L1023.13 482.71L1023.13 587.71L950.86 517.65L950.86 582.71L932.98 582.71L932.98 477.71L1005.25 547.78ZM679.96 482.71L697.84 482.71L697.84 587.71L625.57 517.65L625.57 582.71L607.69 582.71L607.69 477.71L679.96 547.78ZM627.3 159.08L591.48 159.08L580.48 183.57L559.79 183.57L609.44 77.88L659.08 183.57L638.39 183.57ZM329.55 482.71L347.89 482.71L347.89 548.94Q347.89 557.85 352.66 563.33Q357.43 568.81 366.76 568.81Q376.1 568.81 380.87 563.33Q385.64 557.85 385.64 548.94L385.64 482.71L403.98 482.71L403.98 549.86Q403.98 558.34 401.25 564.97Q398.53 571.6 393.5 576.15Q388.47 580.7 381.66 583.11Q374.84 585.52 366.76 585.52Q358.68 585.52 351.87 583.11Q345.05 580.7 340.03 576.15Q335 571.6 332.27 564.97Q329.55 558.34 329.55 549.86ZM757.08 83.57L819.04 83.57L819.04 99.36L774.96 99.36L774.96 122.42L816.19 122.42L816.19 137.98L774.96 137.98L774.96 167.78L819.04 167.78L819.04 183.57L757.08 183.57ZM844.83 482.71L906.8 482.71L906.8 498.5L862.72 498.5L862.72 521.57L903.94 521.57L903.94 537.13L862.72 537.13L862.72 566.92L906.8 566.92L906.8 582.71L844.83 582.71ZM488.27 150.81Q491.52 156.48 495.28 160.76Q499.04 165.03 503.64 167.37Q508.24 169.71 513.74 169.71Q520.36 169.71 524.48 166.23Q528.6 162.74 528.6 157.03Q528.6 151.83 526.04 148.66Q523.47 145.48 518.74 143.19Q514.01 140.9 507.52 138.53Q503.85 137.2 499.26 135.01Q494.66 132.83 490.49 129.41Q486.33 125.98 483.64 120.99Q480.95 116 480.95 108.92Q480.95 100.71 485.17 94.58Q489.39 88.44 496.65 85.06Q503.91 81.68 512.98 81.68Q522.13 81.68 528.85 84.87Q535.56 88.06 540.15 92.96Q544.73 97.86 547.25 103.1L532.69 111.3Q530.7 107.63 527.86 104.54Q525.03 101.45 521.35 99.58Q517.67 97.71 512.82 97.71Q506.24 97.71 503.05 100.74Q499.86 103.78 499.86 107.85Q499.86 111.63 502.26 114.62Q504.66 117.62 509.66 120.23Q514.66 122.84 522.46 125.57Q527.1 127.22 531.62 129.72Q536.14 132.21 539.79 135.82Q543.44 139.44 545.63 144.32Q547.83 149.2 547.83 155.74Q547.83 162.86 545.04 168.49Q542.24 174.12 537.42 177.97Q532.6 181.83 526.53 183.87Q520.46 185.92 513.91 185.92Q504.94 185.92 497.27 182.42Q489.61 178.92 483.91 173.02Q478.22 167.12 474.89 160.22ZM676.08 83.57L732.33 83.57L732.33 99.82L693.96 99.82L693.96 123.8L730.9 123.8L730.9 139.36L693.96 139.36L693.96 183.57L676.08 183.57ZM984.09 83.57L1005.01 83.57L970.85 141.67L970.85 183.57L952.28 183.57L952.28 141.86L918.08 83.57L939 83.57L961.5 125.36ZM835.22 100.28L835.22 83.57L906.83 83.57L906.83 100.28L880.2 100.28L880.2 183.57L861.85 183.57L861.85 100.28ZM240.98 499.42L240.98 482.71L312.58 482.71L312.58 499.42L285.95 499.42L285.95 582.71L267.61 582.71L267.61 499.42ZM342.48 120.91L322.82 60.1L303.17 120.91ZM449.32 536.61L449.32 567.87L462.94 567.87Q468.45 567.87 472.76 566.13Q477.07 564.4 479.56 560.89Q482.04 557.39 482.04 551.93Q482.04 548.05 480.63 545.14Q479.22 542.24 476.64 540.34Q474.05 538.44 470.58 537.52Q467.11 536.61 462.94 536.61ZM449.32 522.77L461.05 522.77Q465.59 522.77 469.04 521.29Q472.49 519.81 474.41 516.98Q476.33 514.15 476.33 510.13Q476.33 504.04 472.13 500.8Q467.94 497.56 461.05 497.56L449.32 497.56ZM609.44 113.49L596.3 144.07L622.6 144.07ZM339.2 462.42Q339.2 458.17 342.25 455.38Q345.29 452.59 349.49 452.59Q353.79 452.59 356.79 455.38Q359.78 458.17 359.78 462.42Q359.78 466.58 356.79 469.42Q353.79 472.25 349.49 472.25Q345.29 472.25 342.25 469.42Q339.2 466.58 339.2 462.42ZM373.74 462.42Q373.74 458.17 376.79 455.38Q379.83 452.59 384.03 452.59Q388.33 452.59 391.33 455.38Q394.32 458.17 394.32 462.42Q394.32 466.58 391.33 469.42Q388.33 472.25 384.03 472.25Q379.83 472.25 376.79 469.42Q373.74 466.58 373.74 462.42Z"/></svg></a>
+    <div class="place">Retreat in Bad Urach</div>
+  </header>
+
+  <section class="intro">
+    <h1>Retreat schedule</h1>
+    <p>Three days of talks, workshops and time together. Most of the day there are two parallel tracks; sessions that span a whole day column are for everyone. Select any session to read more.</p>
+  </section>
+
+  <section class="rule" aria-labelledby="sched-h">
+    <h2 id="sched-h" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Schedule</h2>
+    <div class="controls">
+      <div>
+        <h2>Days</h2>
+        <ul class="chips" id="dayToggles"></ul>
+        <button class="link-btn" id="allDays" type="button">Show all days</button>
+      </div>
+      <div>
+        <h2>Highlight a kind of session</h2>
+        <ul class="chips" id="kindToggles"></ul>
+      </div>
+    </div>
+
+    <div class="sheet tt"><div class="timetable" id="timetable"></div></div>
+    <div class="agenda" id="agenda"></div>
+
+    <footer class="note">Titles marked TBD and abstracts that say “to follow” will be filled in closer to the retreat.</footer>
+  </section>
+</div>
+
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <div class="dlg" id="dlgInner">
+    <div class="dlg-body">
+      <div class="dlg-top">
+        <span class="kind-tag"><i></i><span id="dlgKind"></span></span>
+        <button class="close" type="button" id="dlgClose" aria-label="Close">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3l10 10M13 3L3 13"/></svg>
+        </button>
+      </div>
+      <h2 id="dlgTitle"></h2>
+      <p class="speaker" id="dlgSpeaker"></p>
+      <dl class="facts" id="dlgFacts"></dl>
+      <div class="abstract" id="dlgAbstract"></div>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="prev" id="dlgPrev"><span aria-hidden="true">‹</span><span></span></button>
+      <button type="button" class="next" id="dlgNext"><span></span><span aria-hidden="true">›</span></button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* =========================================================
+   Schedule data — edit here.
+   track: "full" spans the day; "a" is the left track, "b" the right.
+   kind:  talk | workshop | meal | social | logistics
+   ========================================================= */
+const DAYS = [
+  { id: 'mon', name: 'Monday',    sub: 'Arrival day' },
+  { id: 'tue', name: 'Tuesday',   sub: 'Full day' },
+  { id: 'wed', name: 'Wednesday', sub: 'Departure day' },
+];
+
+const KINDS = {
+  talk:      'Talk or plenary',
+  workshop:  'Workshop or session',
+  meal:      'Meal or break',
+  social:    'Social or free time',
+  logistics: 'Logistics and travel',
+};
+
+const SESSIONS = [
+  // ---- Monday
+  { day:'mon', start:'09:30', end:'11:00', track:'full', kind:'logistics', title:'Train to Bad Urach', timeLabel:'09:41–10:36',
+    abstract:'The train leaves at 09:41 and arrives in Bad Urach at 10:36.' },
+  { day:'mon', start:'11:00', end:'11:30', track:'full', kind:'logistics', title:'Arrival & registration' },
+  { day:'mon', start:'11:30', end:'12:00', track:'full', kind:'talk', title:'Welcome speech & speedfriending',
+    abstract:'A short welcome from the organizers, followed by quick rotating one-on-one conversations so that everyone gets to meet many people right at the start.' },
+  { day:'mon', start:'12:00', end:'13:00', track:'full', kind:'meal', title:'Lunch' },
+  { day:'mon', start:'13:00', end:'14:00', track:'full', kind:'workshop', title:'How to do impactful research', speaker:'Ameya Prabhu' },
+  { day:'mon', start:'14:00', end:'14:15', track:'full', kind:'meal', title:'Break' },
+  { day:'mon', start:'14:15', end:'15:15', track:'full', kind:'workshop', title:'Productivity Strategies for Researchers', speaker:'Ben Rank' },
+  { day:'mon', start:'15:15', end:'15:45', track:'full', kind:'meal', title:'Coffee' },
+  { day:'mon', start:'15:45', end:'16:45', track:'full', kind:'workshop', title:'Connections between your research and AI governance', speaker:'Aleksandra Shcherbakova' },
+  { day:'mon', start:'16:45', end:'17:00', track:'full', kind:'meal', title:'Break' },
+  { day:'mon', start:'17:00', end:'18:00', track:'full', kind:'workshop', title:'How to communicate research', speaker:'Maksym Andriushchenko' },
+  { day:'mon', start:'18:00', end:'19:00', track:'full', kind:'meal', title:'Dinner' },
+  { day:'mon', start:'19:00', end:'20:00', track:'full', kind:'workshop', title:'Dealing with AI Anxiety', speaker:'Tilman Masur' },
+  { day:'mon', start:'20:00', end:'21:00', track:'a', kind:'talk', title:'Lightning talks',
+    abstract:'Short talks by participants about anything they are working on or excited about.' },
+  { day:'mon', start:'20:00', end:'22:00', track:'b', kind:'social', title:'Board games' },
+
+  // ---- Tuesday
+  { day:'tue', start:'08:00', end:'09:00', track:'full', kind:'meal', title:'Breakfast' },
+  { day:'tue', start:'09:00', end:'09:45', track:'a', kind:'workshop', title:'Productive disagreement on AI takes', speaker:'Kai Rothe' },
+  { day:'tue', start:'09:00', end:'09:45', track:'b', kind:'workshop', title:'Idea Roulette', speaker:'Busra Asan',
+    abstract:[
+      'Groups of 3 to 5 people each draw one card from four bowls: an AI risk, a domain or setting, a constraint, and an affected stakeholder. Based on the specific combination they draw, each group has 15–20 minutes to come up with a concrete idea, whether that’s a research direction, a mitigation, or an evaluation method, and then presents it back to the room.',
+      'The randomness pushes people to think concretely instead of retreating to whatever topic they already know best. Each group then gives a roughly 3-minute pitch, and at the end everyone votes for the best idea. Expect a mix of genuinely promising research directions and completely absurd ones, and that’s part of the fun.'
+    ] },
+  { day:'tue', start:'09:45', end:'10:45', track:'full', kind:'talk', title:'TBD', speaker:'Paul Röttger' },
+  { day:'tue', start:'10:45', end:'11:00', track:'full', kind:'meal', title:'Break' },
+  { day:'tue', start:'11:00', end:'12:00', track:'full', kind:'talk', title:'TBD', speaker:'Alexander Meinke' },
+  { day:'tue', start:'12:00', end:'13:00', track:'full', kind:'meal', title:'Lunch' },
+  { day:'tue', start:'13:00', end:'14:00', track:'full', kind:'talk', title:'TBD', speaker:'Christian Schroeder de Witt' },
+  { day:'tue', start:'14:00', end:'14:15', track:'full', kind:'meal', title:'Break' },
+  { day:'tue', start:'14:15', end:'15:15', track:'full', kind:'talk', title:'TBD', speaker:'Leo Schwinn' },
+  { day:'tue', start:'15:15', end:'15:45', track:'full', kind:'meal', title:'Coffee' },
+  { day:'tue', start:'15:45', end:'18:00', track:'a', kind:'social', title:'Hike' },
+  { day:'tue', start:'15:45', end:'18:00', track:'b', kind:'social', title:'Free time & 1-on-1s' },
+  { day:'tue', start:'18:00', end:'19:00', track:'full', kind:'meal', title:'Dinner' },
+  { day:'tue', start:'19:00', end:'20:00', track:'a', kind:'workshop', title:'Q&A for master’s students with PhDs' },
+  { day:'tue', start:'19:00', end:'20:00', track:'b', kind:'workshop', title:'Participant contributed sessions' },
+  { day:'tue', start:'20:00', end:'22:00', track:'full', kind:'social', title:'Get together with drinks and music', speaker:'Ameya' },
+
+  // ---- Wednesday
+  { day:'wed', start:'08:00', end:'09:00', track:'full', kind:'meal', title:'Breakfast' },
+  { day:'wed', start:'09:00', end:'09:30', track:'full', kind:'logistics', title:'Clean your room' },
+  { day:'wed', start:'09:30', end:'12:00', track:'a', kind:'workshop', title:'World café', speaker:'Sahar Abdelnabi',
+    abstract:'Rotating small-group discussions: each table takes on a question, and people move between tables in rounds, building on what earlier groups left behind.' },
+  { day:'wed', start:'09:30', end:'10:00', track:'b', kind:'talk', title:'Overview of the AI safety field', speaker:'Johannes Taraz' },
+  { day:'wed', start:'10:00', end:'11:00', track:'b', kind:'workshop', title:'Application workshop', speaker:'Maksym Andriushchenko' },
+  { day:'wed', start:'11:00', end:'12:00', track:'b', kind:'workshop', title:'Hands-on applications' },
+  { day:'wed', start:'12:00', end:'13:00', track:'full', kind:'meal', title:'Lunch' },
+  { day:'wed', start:'13:00', end:'14:30', track:'full', kind:'workshop', title:'Hamming circles',
+    abstract:'Small groups take turns: one person brings the most important problem they are stuck on, in research, career or life, and the rest of the group spends focused time helping them think it through.' },
+  { day:'wed', start:'14:30', end:'15:30', track:'full', kind:'meal', title:'Wind-down & coffee' },
+  { day:'wed', start:'15:30', end:'16:15', track:'full', kind:'logistics', title:'The end' },
+  { day:'wed', start:'16:15', end:'17:30', track:'full', kind:'logistics', title:'Train home', timeLabel:'16:21–17:18',
+    abstract:'The train leaves Bad Urach at 16:21 and arrives at 17:18.' },
+];
+
+/* ========================================================= */
+const DAY_START = 8 * 60, DAY_END = 22 * 60, STEP = 5;
+const MINOR = new Set(['meal', 'logistics']);
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+const mins = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+const dayById = id => DAYS.find(d => d.id === id);
+
+SESSIONS.forEach((s, i) => { s.id = `s${i}`; s.dur = mins(s.end) - mins(s.start); });
+const parallelOf = s => SESSIONS.filter(o => o !== s && o.day === s.day && o.track !== 'full' && s.track !== 'full'
+  && mins(o.start) < mins(s.end) && mins(s.start) < mins(o.end));
+const order = (a, b) => DAYS.findIndex(d => d.id === a.day) - DAYS.findIndex(d => d.id === b.day)
+  || mins(a.start) - mins(b.start) || (a.track > b.track ? 1 : -1);
+const label = s => s.title === 'TBD' && s.speaker ? `Talk by ${s.speaker}` : s.title;
+const timeText = s => s.timeLabel || `${s.start}–${s.end}`;
+const durText = d => d < 60 ? `${d} min` : (d % 60 ? `${Math.floor(d / 60)} h ${d % 60} min` : `${d / 60} h`);
+
+/* ---------- state ---------- */
+let shown = DAYS.map(d => d.id);
+try { const saved = JSON.parse(localStorage.getItem('aist-retreat-days')); if (Array.isArray(saved)) shown = saved.filter(dayById); } catch {}
+let filter = null;
+const save = () => { try { localStorage.setItem('aist-retreat-days', JSON.stringify(shown)); } catch {} };
+
+/* ---------- controls ---------- */
+function renderControls() {
+  $('#dayToggles').innerHTML = DAYS.map(d => `
+    <li><button class="day-toggle" type="button" data-day="${d.id}" aria-pressed="${shown.includes(d.id)}">
+      <span class="box" aria-hidden="true"></span><span class="name">${d.name}</span><span class="sub">${d.sub}</span>
+    </button></li>`).join('');
+  $('#kindToggles').innerHTML = Object.entries(KINDS).map(([k, label]) => `
+    <li><button class="kind-toggle" type="button" data-kind="${k}" aria-pressed="${filter === k}">
+      <span class="sw" aria-hidden="true"></span><span class="uline">${label}</span>
+    </button></li>`).join('');
+  $('#allDays').hidden = shown.length === DAYS.length;
+}
+
+$('#dayToggles').addEventListener('click', e => {
+  const b = e.target.closest('[data-day]'); if (!b) return;
+  const id = b.dataset.day;
+  shown = shown.includes(id) ? shown.filter(x => x !== id) : DAYS.map(d => d.id).filter(x => x === id || shown.includes(x));
+  save(); render();
+});
+$('#allDays').addEventListener('click', () => { shown = DAYS.map(d => d.id); save(); render(); });
+$('#kindToggles').addEventListener('click', e => {
+  const b = e.target.closest('[data-kind]'); if (!b) return;
+  filter = filter === b.dataset.kind ? null : b.dataset.kind;
+  if (filter) document.body.dataset.filter = filter; else delete document.body.dataset.filter;
+  render();
+});
+
+/* ---------- timetable ---------- */
+function card(s) {
+  const r0 = (mins(s.start) - DAY_START) / STEP + 1, r1 = (mins(s.end) - DAY_START) / STEP + 1;
+  const col = s.track === 'full' ? '1 / 3' : s.track === 'a' ? '1 / 2' : '2 / 3';
+  const size = s.dur <= 15 ? 'tiny' : s.dur <= 30 ? 'short' : '';
+  const label = `${s.title}${s.speaker ? ', ' + s.speaker : ''}, ${dayById(s.day).name} ${timeText(s)}`;
+  return `<button type="button" class="s ${size} ${filter === s.kind ? 'match' : ''}" data-kind="${s.kind}" data-id="${s.id}"
+      style="grid-row:${r0} / ${r1};grid-column:${col}" aria-label="${esc(label)}">
+    <span class="t">${esc(s.title)}</span>
+    ${s.speaker && size !== 'tiny' ? `<span class="who">${esc(s.speaker)}</span>` : ''}
+    ${s.timeLabel && !size ? `<span class="when">${esc(s.timeLabel)}</span>` : ''}
+    ${!MINOR.has(s.kind) ? '<span class="more" aria-hidden="true"></span>' : ''}
+  </button>`;
+}
+
+function renderTimetable() {
+  const tt = $('#timetable');
+  const days = DAYS.filter(d => shown.includes(d.id));
+  if (!days.length) {
+    tt.style.setProperty('--days', 1);
+    tt.innerHTML = `<div class="empty" style="grid-column:1 / -1"><p>No days selected</p>Choose one or more days above to see their sessions.</div>`;
+    return;
+  }
+  tt.style.setProperty('--days', days.length);
+  let hours = '';
+  for (let h = DAY_START / 60; h <= DAY_END / 60; h++)
+    hours += `<time style="top:calc(var(--hour) * ${h - DAY_START / 60})">${String(h).padStart(2, '0')}:00</time>`;
+  tt.innerHTML =
+    `<div class="tt-corner" aria-hidden="true"></div>` +
+    days.map(d => `<div class="tt-day"><h3>${d.name}</h3><span>${d.sub}</span></div>`).join('') +
+    `<div class="tt-axis" aria-hidden="true">${hours.replace(/<time[^>]*>22:00<\/time>$/, '')}</div>` +
+    days.map(d => `<div class="tt-col" role="group" aria-label="${d.name}">${
+      SESSIONS.filter(s => s.day === d.id).map(card).join('')}</div>`).join('');
+}
+
+/* ---------- agenda ---------- */
+function agItem(s) {
+  return `<li class="ag-item ${MINOR.has(s.kind) ? 'minor' : ''} ${filter === s.kind ? 'match' : ''}" data-kind="${s.kind}">
+    <button type="button" data-id="${s.id}">
+      <time>${esc(timeText(s))}</time>
+      <span><span class="t">${esc(s.title)}</span>
+        ${s.speaker ? `<span class="who">${esc(s.speaker)}</span>` : ''}</span>
+    </button></li>`;
+}
+function agParallel(group) {
+  const start = group.map(s => s.start).sort()[0], end = group.map(s => s.end).sort().at(-1);
+  const col = t => group.filter(s => s.track === t).map(s => `
+    <button type="button" class="ag-sub ${filter === s.kind ? 'match' : ''}" data-kind="${s.kind}" data-id="${s.id}">
+      ${s.start !== start || s.end !== end ? `<time>${s.start}–${s.end}</time>` : ''}
+      <span class="t">${esc(s.title)}</span>
+      ${s.speaker ? `<span class="who">${esc(s.speaker)}</span>` : ''}
+    </button>`).join('');
+  return `<li class="ag-item ag-par"><time>${start}–${end}<small>in parallel</small></time>
+    <div class="ag-cols"><div>${col('a')}</div><div>${col('b')}</div></div></li>`;
+}
+function agendaRows(dayId) {
+  const list = SESSIONS.filter(s => s.day === dayId).sort(order);
+  let out = '', i = 0;
+  while (i < list.length) {
+    const s = list[i];
+    if (s.track === 'full') { out += agItem(s); i++; continue; }
+    const group = [s]; let end = mins(s.end); i++;
+    while (i < list.length && list[i].track !== 'full' && mins(list[i].start) < end) {
+      group.push(list[i]); end = Math.max(end, mins(list[i].end)); i++;
+    }
+    out += group.length > 1 ? agParallel(group) : agItem(s);
+  }
+  return out;
+}
+
+function renderAgenda() {
+  const days = DAYS.filter(d => shown.includes(d.id));
+  if (!days.length) { $('#agenda').innerHTML = `<div class="empty sheet"><p>No days selected</p>Choose one or more days above to see their sessions.</div>`; return; }
+  $('#agenda').innerHTML = days.map(d => `
+    <section class="ag-day"><h3>${d.name} <span>${d.sub}</span></h3>
+      <ol class="ag-list">${agendaRows(d.id)}</ol>
+    </section>`).join('');
+}
+
+function render() { renderControls(); renderTimetable(); renderAgenda(); }
+
+/* ---------- dialog ---------- */
+const dlg = $('#dlg');
+let current = null;
+const visibleList = () => SESSIONS.filter(s => shown.includes(s.day) || s === current).sort(order);
+
+function openSession(id) {
+  const s = SESSIONS.find(x => x.id === id); if (!s) return;
+  current = s;
+  const day = dayById(s.day);
+  $('#dlgInner').dataset.kind = s.kind;
+  $('#dlgKind').textContent = KINDS[s.kind];
+  $('#dlgTitle').textContent = s.title === 'TBD' ? 'Title to be announced' : s.title;
+  $('#dlgSpeaker').textContent = s.speaker || '';
+  $('#dlgSpeaker').hidden = !s.speaker;
+  const par = parallelOf(s);
+  $('#dlgFacts').innerHTML = `
+    <dt>When</dt><dd>${day.name}, ${esc(timeText(s))}${s.timeLabel ? '' : ` <span style="color:var(--muted)">(${durText(s.dur)})</span>`}</dd>
+    <dt>Track</dt><dd>${s.track === 'full' ? 'Everyone' : 'Parallel track'}</dd>
+    ${par.length ? `<dt>At the same time</dt><dd>${par.map(p => `<button class="link-btn" type="button" data-goto="${p.id}">${esc(label(p))}</button>`).join('<br>')}</dd>` : ''}`;
+  const abs = Array.isArray(s.abstract) ? s.abstract : s.abstract ? [s.abstract] : [];
+  $('#dlgAbstract').innerHTML = abs.length
+    ? abs.map(p => `<p>${esc(p)}</p>`).join('')
+    : `<p class="pending">${MINOR.has(s.kind) || s.kind === 'social' ? 'No further details.' : s.title === 'TBD' ? 'Title and abstract to follow.' : 'Abstract to follow.'}</p>`;
+
+  const list = visibleList(), i = list.indexOf(s);
+  const prev = list[i - 1], next = list[i + 1];
+  const pb = $('#dlgPrev'), nb = $('#dlgNext');
+  pb.disabled = !prev; nb.disabled = !next;
+  pb.dataset.goto = prev?.id || ''; nb.dataset.goto = next?.id || '';
+  pb.lastElementChild.textContent = prev ? label(prev) : '';
+  nb.firstElementChild.textContent = next ? label(next) : '';
+  pb.setAttribute('aria-label', prev ? `Previous: ${label(prev)}` : '');
+  nb.setAttribute('aria-label', next ? `Next: ${label(next)}` : '');
+  $('.dlg-body', dlg).scrollTop = 0;
+  if (!dlg.open) dlg.showModal();
+}
+
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-id]'); if (b && !dlg.contains(b)) openSession(b.dataset.id);
+});
+dlg.addEventListener('click', e => {
+  if (e.target === dlg) return dlg.close();
+  const g = e.target.closest('[data-goto]'); if (g && g.dataset.goto) openSession(g.dataset.goto);
+});
+$('#dlgClose').addEventListener('click', () => dlg.close());
+dlg.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' && !$('#dlgNext').disabled) openSession($('#dlgNext').dataset.goto);
+  if (e.key === 'ArrowLeft' && !$('#dlgPrev').disabled) openSession($('#dlgPrev').dataset.goto);
+});
+dlg.addEventListener('close', () => {
+  const btn = current && document.querySelector(`.s[data-id="${current.id}"], .ag-item [data-id="${current.id}"]`);
+  const visible = btn && btn.offsetParent;
+  if (visible) btn.focus();
+  current = null;
+});
+
+render();
+</script>
+</body>
+</html>
