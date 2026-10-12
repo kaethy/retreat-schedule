@@ -271,7 +271,6 @@ footer.note { margin-top: 2.5rem; color: var(--muted); font-size: .95rem; }
 
   <section class="intro">
     <h1>Retreat schedule</h1>
-    <p>Three days of talks, workshops and time together. Most of the day there are two parallel tracks; sessions that span a whole day column are for everyone. Select any session to read more.</p>
   </section>
 
   <section class="rule" aria-labelledby="sched-h">
@@ -359,8 +358,7 @@ const SESSIONS = [
 
   // ---- Tuesday
   { day:'tue', start:'08:00', end:'09:00', track:'full', kind:'meal', title:'Breakfast' },
-  { day:'tue', start:'09:00', end:'09:45', track:'a', kind:'workshop', title:'Productive disagreement on AI takes', speaker:'Kai Rothe' },
-  { day:'tue', start:'09:00', end:'09:45', track:'b', kind:'workshop', title:'Idea Roulette', speaker:'Busra Asan',
+  { day:'tue', start:'09:00', end:'09:45', track:'full', kind:'workshop', title:'Idea Roulette', speaker:'Busra Asan',
     abstract:[
       'Groups of 3 to 5 people each draw one card from four bowls: an AI risk, a domain or setting, a constraint, and an affected stakeholder. Based on the specific combination they draw, each group has 15–20 minutes to come up with a concrete idea, whether that’s a research direction, a mitigation, or an evaluation method, and then presents it back to the room.',
       'The randomness pushes people to think concretely instead of retreating to whatever topic they already know best. Each group then gives a roughly 3-minute pitch, and at the end everyone votes for the best idea. Expect a mix of genuinely promising research directions and completely absurd ones, and that’s part of the fun.'
@@ -371,13 +369,17 @@ const SESSIONS = [
   { day:'tue', start:'12:00', end:'13:00', track:'full', kind:'meal', title:'Lunch' },
   { day:'tue', start:'13:00', end:'14:00', track:'full', kind:'talk', title:'TBD', speaker:'Christian Schroeder de Witt' },
   { day:'tue', start:'14:00', end:'14:15', track:'full', kind:'meal', title:'Break' },
-  { day:'tue', start:'14:15', end:'15:15', track:'full', kind:'talk', title:'TBD', speaker:'Leo Schwinn' },
+  { day:'tue', start:'14:15', end:'15:15', track:'full', kind:'talk', title:'Evaluating AI Safety Is Hard', speaker:'Leo Schwinn',
+    abstract:[
+      'Progress in AI safety depends largely on the reliability of our evaluations. They decide which models we deploy, which methods we consider promising, and where we invest future resources. If our evaluations are unreliable, so are these decisions.',
+      'In my talk, I will first show that current adversarial safety evaluations are unreliable. I will then present a possible direction for obtaining useful safety metrics in a world where the lower-bound of robustness for all models is 0%. Finally, I will argue that we should keep measuring whether an attack changes a model, even when the attack fails.'
+    ] },
   { day:'tue', start:'15:15', end:'15:45', track:'full', kind:'meal', title:'Coffee' },
   { day:'tue', start:'15:45', end:'18:00', track:'a', kind:'social', title:'Hike' },
   { day:'tue', start:'15:45', end:'18:00', track:'b', kind:'social', title:'Free time & 1-on-1s' },
   { day:'tue', start:'18:00', end:'19:00', track:'full', kind:'meal', title:'Dinner' },
   { day:'tue', start:'19:00', end:'20:00', track:'a', kind:'workshop', title:'Q&A for master’s students with PhDs' },
-  { day:'tue', start:'19:00', end:'20:00', track:'b', kind:'workshop', title:'Participant contributed sessions' },
+  { day:'tue', start:'19:00', end:'20:00', track:'b', kind:'workshop', title:'Productive disagreement on AI takes', speaker:'Kai Rothe' },
   { day:'tue', start:'20:00', end:'22:00', track:'full', kind:'social', title:'Get together with drinks and music', speaker:'Ameya' },
 
   // ---- Wednesday
@@ -391,8 +393,10 @@ const SESSIONS = [
   { day:'wed', start:'12:00', end:'13:00', track:'full', kind:'meal', title:'Lunch' },
   { day:'wed', start:'13:00', end:'14:30', track:'full', kind:'workshop', title:'Hamming circles',
     abstract:'Small groups take turns: one person brings the most important problem they are stuck on, in research, career or life, and the rest of the group spends focused time helping them think it through.' },
-  { day:'wed', start:'14:30', end:'15:30', track:'full', kind:'meal', title:'Wind-down & coffee' },
-  { day:'wed', start:'15:30', end:'16:15', track:'full', kind:'logistics', title:'The end' },
+  { day:'wed', start:'14:30', end:'15:00', track:'full', kind:'talk', title:'Closing remarks' },
+  { day:'wed', start:'15:00', end:'15:30', track:'full', kind:'meal', title:'Coffee' },
+  { day:'wed', start:'15:30', end:'16:00', track:'full', kind:'social', title:'Wind-down' },
+  { day:'wed', start:'16:00', end:'16:15', track:'full', kind:'logistics', title:'The end' },
   { day:'wed', start:'16:15', end:'17:30', track:'full', kind:'logistics', title:'Train home', timeLabel:'16:21–17:18',
     abstract:'The train leaves Bad Urach at 16:21 and arrives at 17:18.' },
 ];
